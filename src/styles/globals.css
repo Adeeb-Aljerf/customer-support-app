@@ -1,0 +1,326 @@
+/* src/styles/globals.css */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap");
+
+:root {
+  /* Primary Purple Palette */
+  --color-primary-light: #d2c0f5;
+  --color-primary: #7336e6;
+  --color-primary-dark: #3a2f53;
+  --color-primary-darker: #251f32;
+
+  /* Secondary Blue Palette */
+  --color-secondary-light: #caedff;
+  --color-secondary: #2c9ed8;
+  --color-secondary-dark: #3a2f53;
+
+  /* Success Green Palette */
+  --color-success-light: #caedff;
+  --color-success: #bfd445;
+  --color-success-dark: #3a2f53;
+
+  /* Warning Palette */
+  --color-warning-light: #f9f5ff;
+  --color-warning: #7336e6;
+  --color-warning-dark: #3a2f53;
+
+  /* Danger Red Palette */
+  --color-danger-light: #fdc2bf;
+  --color-danger: #e76a63;
+  --color-danger-dark: #3a2f53;
+
+  /* Gray/Neutral Palette */
+  --color-gray-lightest: #f9f5ff;
+  --color-gray-light: #f0f0f0;
+  --color-gray: #6c6c6c;
+  --color-gray-dark: #252526;
+  --color-gray-darker: #251f32;
+
+  /* Basic Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  /* Background Colors */
+  --color-background-primary: #f9f5ff;
+  --color-background-secondary: #f0f0f0;
+  --color-background-dark: #251f32;
+
+  /* Shadow Colors */
+  --color-shadow-primary: #e2dfe9;
+  --color-shadow-secondary: #b9b5c0a6;
+
+  /* Border Colors */
+  --color-border-primary: #e0d8f6;
+  --color-border-secondary: #e2dfe9;
+  --color-border-header: #dad4ea;
+  
+  /* UI Component Colors */
+  --color-ui-profile-button: #c9c1de;
+  --color-ui-logo-background: #b69cf3;
+  --color-ui-nav-item-hover: rgba(255, 255, 255, 0.15);
+  --color-ui-nav-item-active: #ffffff33;
+  
+  --border-radius: 4px;
+
+  /* Typography */
+  --font-header1: 600 2rem/100% "DM Sans", sans-serif; /* 20px */
+  --font-header2: 600 1.4rem/100% "DM Sans", sans-serif; /* 14px */
+  --font-body: 400 1.4rem/100% "DM Sans", sans-serif; /* 14px */
+  --font-small: 400 1.2rem/100% "DM Sans", sans-serif; /* 12px */
+}
+
+/* Global Typography Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 62.5% of 16px = 10px */
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font: var(--font-body);
+  background-color: var(--color-background-primary);
+  color: var(--color-black);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Heading Styles */
+h1,
+.h1 {
+  font: var(--font-header1);
+  color: var(--color-black);
+  margin: 0 0 1rem 0;
+  letter-spacing: 0px;
+}
+
+h2,
+.h2 {
+  font: var(--font-header2);
+  color: var(--color-black);
+  margin: 0 0 0.875rem 0;
+  letter-spacing: 0px;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font: var(--font-header2);
+  color: var(--color-black);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: 0px;
+}
+
+/* Body Text Styles */
+p,
+.body-text {
+  font: var(--font-body);
+  color: var(--color-black);
+  margin: 0 0 1rem 0;
+  letter-spacing: 0px;
+}
+
+/* Small Text Styles */
+small,
+.small-text {
+  font: var(--font-small);
+  color: var(--color-black);
+  letter-spacing: 0px;
+}
+
+/* Link Styles */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* List Styles */
+ul,
+ol {
+  font: var(--font-body);
+  color: var(--color-black);
+  margin: 0 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+/* Button Text Styles */
+button,
+.btn {
+  font: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0px;
+}
+
+/* Input and Form Text Styles */
+input,
+textarea,
+select {
+  font: var(--font-body);
+  color: var(--color-black);
+  letter-spacing: 0px;
+}
+
+/* Utility Classes for Typography Colors */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+.text-primary-dark {
+  color: var(--color-primary-dark);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-secondary-light {
+  color: var(--color-secondary-light);
+}
+.text-success {
+  color: var(--color-success);
+}
+.text-warning {
+  color: var(--color-warning);
+}
+.text-danger {
+  color: var(--color-danger);
+}
+.text-gray {
+  color: var(--color-gray);
+}
+.text-gray-light {
+  color: var(--color-gray-light);
+}
+.text-gray-dark {
+  color: var(--color-gray-dark);
+}
+.text-white {
+  color: var(--color-white);
+}
+.text-black {
+  color: var(--color-black);
+}
+
+/* Background Color Utilities */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+.bg-primary-dark {
+  background-color: var(--color-primary-dark);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-secondary-light {
+  background-color: var(--color-secondary-light);
+}
+.bg-success {
+  background-color: var(--color-success);
+}
+.bg-warning {
+  background-color: var(--color-warning);
+}
+.bg-danger {
+  background-color: var(--color-danger);
+}
+.bg-gray-light {
+  background-color: var(--color-gray-light);
+}
+.bg-white {
+  background-color: var(--color-white);
+}
+.bg-background-primary {
+  background-color: var(--color-background-primary);
+}
+.bg-background-secondary {
+  background-color: var(--color-background-secondary);
+}
+
+/* Font Weight Utilities */
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+
+/* Text Alignment */
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+/* Text Transform */
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+/* Border Utilities */
+.border {
+  border: 1px solid var(--color-border-primary);
+}
+.border-primary {
+  border: var(--border-radius) solid var(--color-border-primary);
+}
+.border-secondary {
+  border: 1px solid var(--color-border-secondary);
+}
+.rounded {
+  border-radius: var(--border-radius);
+}
+
+/* Shadow Utilities - Based on Figma Drop Shadow */
+.shadow {
+  box-shadow: 0px 2px 6px var(--color-shadow-secondary);
+}
+.shadow-primary {
+  box-shadow: 0px 2px 6px var(--color-shadow-primary);
+}
+.shadow-figma {
+  /* Figma drop shadow: #B9B5C0A6 65% spread and 6 blur and y:2, x:0 */
+  box-shadow: 0px 2px 6px 0px rgba(185, 181, 192, 0.65);
+}
