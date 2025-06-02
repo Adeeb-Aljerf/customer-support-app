@@ -1,0 +1,38 @@
+.ticketInfo {
+  width: 683px;
+  height: 26px;
+  justify-content: space-between;
+  margin-bottom: -2rem;
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.firstFrame {
+  width: 441px;
+  height: 18px;
+  display: flex;
+  gap: 22rem;
+  align-items: center;
+}
+
+.secondFrame {
+  width: 162px;
+  height: 18px;
+  gap: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  font-family: DM Sans;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #6C6C6C;
+}

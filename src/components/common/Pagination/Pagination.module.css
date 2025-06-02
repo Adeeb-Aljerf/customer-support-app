@@ -1,0 +1,118 @@
+.pagination {
+  width: 68.4rem;
+  height: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* First container - Rows per page */
+.rowsContainer {
+  width: 15.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.rowsLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #6C6C6C;
+}
+
+.rowsInput {
+  width: 6.3rem;
+  height: 1.6rem;
+  border-radius: 0.4rem;
+  padding: 0.4rem;
+  background: #FFFFFF;
+  border: none;
+  outline: none;
+  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5E5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.rowsInput:focus {
+  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5E5, 0rem 0rem 0rem 0.2rem rgba(210, 203, 229, 0.3);
+}
+
+/* Second container - Navigation */
+.navigationContainer {
+  width: 15.2rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* 10px gap between elements */
+}
+
+.navButton {
+  width: 1.6rem;
+  height: 1.6rem;
+  background: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #6C6C6C;
+  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5;
+  border-radius: 2rem; /* 20px border radius for icons */
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.navButton:hover:not(:disabled) {
+  color: #333;
+}
+
+/* Page numbers container */
+.pageNumbers {
+  width: 5.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; /* 4px gap between numbers */
+}
+
+.pageNumber {
+  width: 1.6rem;
+  height: 1.6rem;
+
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border-radius: 0.4rem; /* 4px border radius for numbers */
+}
+
+.pageNumberActive {
+
+  color:#7336E6;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.pageNumberInactive {
+  color: #00000066;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.pageNumber:hover {
+  opacity: 0.8;
+}

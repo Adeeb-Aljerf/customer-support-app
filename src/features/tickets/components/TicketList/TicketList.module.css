@@ -1,0 +1,51 @@
+.ticketList {
+  width: 684px;
+  /* Dynamic height using CSS calc and viewport units */
+  height: max(
+    400px, /* Minimum height */
+    min(
+      calc(552px + (100vh - 730px) * 0.6), /* Grows from 552px base */
+      calc(100vh - 200px) /* Maximum to leave space for other elements */
+    )
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Specific breakpoints for better control */
+@media (max-height: 730px) {
+  .ticketList {
+    height: 552px;
+  }
+}
+
+@media (min-height: 900px) {
+  .ticketList {
+    height: calc(552px + (100vh - 730px) * 0.5);
+  }
+}
+
+@media (min-height: 1200px) {
+  .ticketList {
+    height: calc(552px + (100vh - 730px) * 0.6);
+    max-height: calc(100vh - 180px);
+  }
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #6C6C6C;
+  padding: 0;
+  margin: 0;
+}

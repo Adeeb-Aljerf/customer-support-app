@@ -48,6 +48,19 @@
   /* Shadow Colors */
   --color-shadow-primary: #e2dfe9;
   --color-shadow-secondary: #b9b5c0a6;
+  
+  /* Add these new shadow colors for ticket status button */
+  --color-shadow-ticket-default: rgba(0, 0, 0, 0.15); /* #00000026 */
+  --color-shadow-ticket-selected-1: #DAD6E3;
+  --color-shadow-ticket-selected-2: rgba(191, 163, 245, 0.3); /* #BFA3F54D */
+
+  /* Add this new shadow color for sidebar */
+  --color-shadow-sidebar: #E2DFE9;
+
+  /* Add these new background colors for ticket status button */
+  --color-background-ticket-default: rgba(255, 255, 255, 0.4); /* #FFFFFF66 */
+  --color-background-ticket-hover: rgba(255, 255, 255, 0.5); /* #FFFFFF80 */
+  --color-background-ticket-selected: #ffffff;
 
   /* Border Colors */
   --color-border-primary: #e0d8f6;
@@ -88,6 +101,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
+  overflow-y: hidden;
 }
 
 /* Heading Styles */
@@ -165,7 +179,13 @@ li {
 }
 
 /* Button Text Styles */
-button,
+button {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Keep .btn class for styled buttons */
 .btn {
   font: var(--font-body);
   font-weight: 600;

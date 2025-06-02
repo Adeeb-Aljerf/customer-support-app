@@ -1,0 +1,60 @@
+.ticketStatusButton {
+  width: 16.4rem;         /* 164px */
+  height: 4.4rem;         /* 44px */
+  display: flex;
+  align-items: center;
+  gap: 1rem;              /* 10px gap for non-selected */
+  padding: 1.2rem 1.6rem; /* 12px top/bottom, 16px left/right */
+  border-bottom: 0.1rem solid var(--color-transparent);
+  background-color: var(--color-background-ticket-default);
+  box-shadow: 0 0.1rem 0.2rem 0 var(--color-shadow-ticket-default);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* Text styling */
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;      /* 14px */
+  line-height: 1;         /* 100% */
+  letter-spacing: 0;
+  color: var(--color-gray-dark);
+}
+
+.ticketStatusButton:focus {
+  outline: none;          
+}
+
+.ticketStatusButton:hover {
+  background-color: var(--color-background-ticket-hover);
+}
+
+.ticketStatusButton.selected {
+  gap: 0.8rem;            /* 8px gap for selected */
+  background-color: var(--color-background-ticket-selected);
+  box-shadow: 
+    0 0.2rem 0.8rem 0 var(--color-shadow-ticket-selected-1),
+    0 1rem 1rem 0 var(--color-shadow-ticket-selected-2);
+}
+
+.selectedIndicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0.3rem;          /* 3px */
+  height: 4.4rem;         /* 44px */
+  background: var(--color-primary);
+}
+
+/* Small screen adjustments */
+@media (max-width: 768px) {
+  .ticketStatusButton {
+    width: 10rem;           /* Reduced from 164px to 120px */
+    padding: 1.2rem 1rem;   /* Reduced horizontal padding */
+    gap: 0.8rem;            /* Slightly reduced gap */
+  }
+
+  .ticketStatusButton.selected {
+    gap: 0.6rem;            /* Reduced gap for selected state */
+  }
+}

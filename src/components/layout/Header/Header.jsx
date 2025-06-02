@@ -1,7 +1,10 @@
 import { Icon } from "../../common/icons/main.js";
+import { useSearch } from "../../../features/tickets/hooks/useSearch";
 import styles from "./Header.module.css";
 
 const Header = ({ title = "Ticket List" }) => {
+  const { searchTerm, handleSearchChange } = useSearch();
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -11,8 +14,10 @@ const Header = ({ title = "Ticket List" }) => {
           <div className={styles.searchBar}>
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search by name"
               className={styles.searchInput}
+              value={searchTerm}
+              onChange={(e) => handleSearchChange(e.target.value)}
             />
             <Icon name="magnifying-glass" size={20} color="var(--color-gray)" />
           </div>
