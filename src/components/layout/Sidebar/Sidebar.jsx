@@ -1,7 +1,7 @@
 import Icon from "../../common/icons/Icon";
 import TicketStatusButton from "../../common/TicketStatusButton/ticketStatusButton";
 import { useFetchTickets } from "../../../features/tickets/hooks/useFetchTickets";
-import styles from "./sidebar.module.css";
+import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
   const { fetchAndFilterTickets, currentFilter } = useFetchTickets();
