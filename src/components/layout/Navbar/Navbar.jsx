@@ -3,7 +3,7 @@ import { Icon } from "../../common/icons/main.js";
 import styles from "./Navbar.module.css";
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState("dashboard");
+  const [activeItem, setActiveItem] = useState("tickets");
 
   // Handle icon selection
   const handleIconClick = (item) => {
@@ -13,8 +13,12 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       {/* Logo */}
-      <div className={styles.logo}>
-        <Icon name="squares-2x2" variant="solid" size={24} color="white" />
+      <div>
+        <img
+          src="src/assets/logos/Logo.png"
+          alt="Customer Support App Logo"
+          className={styles.logoImage}
+        />
       </div>
 
       {/* Main Navigation Container */}
@@ -26,7 +30,16 @@ const Sidebar = () => {
           }`}
           onClick={() => handleIconClick("dashboard")}
         >
-          <Icon name="squares-2x2" variant="solid" size={20} color="white" />
+          <Icon
+            name="squares-2x2"
+            variant="solid"
+            size={20}
+            color={
+              activeItem === "dashboard"
+                ? "white"
+                : "var(--color-ui-nav-item-inactive)"
+            }
+          />
         </div>
 
         {/* Tickets */}
@@ -36,7 +49,16 @@ const Sidebar = () => {
           }`}
           onClick={() => handleIconClick("tickets")}
         >
-          <Icon name="ticket" variant="solid" size={20} color="white" />
+          <Icon
+            name="ticket"
+            variant="solid"
+            size={20}
+            color={
+              activeItem === "tickets"
+                ? "white"
+                : "var(--color-ui-nav-item-inactive)"
+            }
+          />
         </div>
 
         {/* User Group */}
@@ -46,7 +68,16 @@ const Sidebar = () => {
           }`}
           onClick={() => handleIconClick("users")}
         >
-          <Icon name="user-group" variant="solid" size={20} color="white" />
+          <Icon
+            name="user-group"
+            variant="solid"
+            size={20}
+            color={
+              activeItem === "users"
+                ? "white"
+                : "var(--color-ui-nav-item-inactive)"
+            }
+          />
         </div>
 
         {/* Document Chart */}
@@ -60,7 +91,11 @@ const Sidebar = () => {
             name="document-chart-bar"
             variant="solid"
             size={20}
-            color="white"
+            color={
+              activeItem === "reports"
+                ? "white"
+                : "var(--color-ui-nav-item-inactive)"
+            }
           />
         </div>
 
@@ -71,7 +106,16 @@ const Sidebar = () => {
           }`}
           onClick={() => handleIconClick("settings")}
         >
-          <Icon name="cog-6-tooth" variant="solid" size={20} color="white" />
+          <Icon
+            name="cog-6-tooth"
+            variant="solid"
+            size={20}
+            color={
+              activeItem === "settings"
+                ? "white"
+                : "var(--color-ui-nav-item-inactive)"
+            }
+          />
         </div>
       </div>
 
@@ -87,7 +131,11 @@ const Sidebar = () => {
           name="arrow-right-start-on-rectangle"
           variant="solid"
           size={24}
-          color="white"
+          color={
+            activeItem === "logout"
+              ? "white"
+              : "var(--color-ui-nav-item-inactive)"
+          }
         />
       </div>
     </aside>

@@ -1,15 +1,9 @@
 import { useFetchTickets } from "../../hooks/useFetchTickets";
 import TicketRow from "../TicketRow/TicketRow";
-import styles from './TicketList.module.css';
+import styles from "./TicketList.module.css";
 
 export default function TicketList() {
-  const { 
-    tickets, 
-    loading, 
-    error,
-    currentFilter,
-    search
-  } = useFetchTickets();
+  const { tickets, loading, error, currentFilter, search } = useFetchTickets();
 
   const { isSearching, searchTerm } = search;
 
@@ -33,10 +27,9 @@ export default function TicketList() {
     return (
       <div className={styles.ticketList}>
         <div className={styles.loading}>
-          {isSearching 
+          {isSearching
             ? `No customers found with name "${searchTerm}"`
-            : `No ${currentFilter} tickets found`
-          }
+            : `No ${currentFilter} tickets found`}
         </div>
       </div>
     );
@@ -45,10 +38,7 @@ export default function TicketList() {
   return (
     <div className={styles.ticketList}>
       {tickets.map((ticket) => (
-        <TicketRow 
-          key={ticket.id} 
-          ticket={ticket} 
-        />
+        <TicketRow key={ticket.id} ticket={ticket} />
       ))}
     </div>
   );

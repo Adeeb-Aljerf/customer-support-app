@@ -23,7 +23,7 @@ const Header = ({ title = "Ticket List" }) => {
           </div>
 
           <button className={styles.filterButton}>
-            <Icon name="funnel" size={20} color="var(--color-gray)" />
+            <Icon name="funnel" size={20} color="#645F6D" variant="solid" />
           </button>
         </div>
       </div>

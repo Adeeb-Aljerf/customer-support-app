@@ -13,13 +13,7 @@
   padding-bottom: 3em;
 }
 
-.logo {
-  background-color: var(--color-ui-logo-background);
-  border-radius: 0.4rem; /* 4px */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .navContainer {
   width: 3.6rem; /* 36px */

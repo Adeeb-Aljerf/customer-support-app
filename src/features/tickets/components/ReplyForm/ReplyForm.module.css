@@ -1,0 +1,119 @@
+.replyForm {
+  position: absolute;
+  width: 41.6rem; /* 416px */
+  height: 4.8rem; /* 48px */
+  top: 61.8rem; /* 618px */
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4rem; /* 40px */
+  background: var(--color-gray-light);
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+.leftContainer {
+  position: absolute;
+  left: 1.6rem; /* 16px */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* 8px */
+  width: calc(
+    100% - 13.2rem
+  ); /* Account for right container width and padding */
+  height: 2rem; /* 20px */
+}
+
+.messageInput {
+  background: var(--color-transparent);
+  border: none;
+  outline: none;
+  font-size: 1.4rem; /* 14px */
+  flex: 1;
+  color: var(--color-black);
+  font-family: "DM Sans", sans-serif;
+  min-width: 0; /* Allow input to shrink */
+}
+
+.messageInput::placeholder {
+  color: var(--color-gray);
+}
+
+.rightContainer {
+  position: absolute;
+  right: 5.6rem; /* Space for send button + padding */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  height: 3.2rem;
+}
+
+.attachmentContainer {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.attachmentIcon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--color-gray);
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.attachmentIcon:hover {
+  color: var(--color-primary);
+}
+
+.sendButton {
+  position: absolute;
+  right: -5.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--color-primary-dark);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 1; /* Ensure button stays on top */
+}
+
+.sendButton:hover {
+  background: var(--color-primary-dark);
+}
+
+.sendButton:disabled {
+  background: var(--color-primary-dark);
+  cursor: not-allowed;
+}
+
+.sendIcon {
+  width: 1.6rem; /* 16px */
+  height: 1.6rem; /* 16px */
+  color: var(--color-white);
+}
+
+.emojiIcon {
+  width: 2rem; /* 20px */
+  height: 2rem; /* 20px */
+  color: var(--color-gray);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.emojiIcon:hover {
+  color: var(--color-primary);
+}

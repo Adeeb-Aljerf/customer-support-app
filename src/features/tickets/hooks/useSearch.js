@@ -1,21 +1,50 @@
-import { useState } from 'react';
-import { useTicketStore } from '../store/useTicketStore';
+import { useState } from "react";
+import { useTicketStore } from "../store/useTicketStore";
 
 export const useSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
   const {
-    searchTickets,
-    clearSearch,
+    setSearchResults,
+    setIsSearching,
+    setSearchTerm,
+    setCurrentPage,
+    filteredTickets,
     isSearching,
     searchTerm: storeSearchTerm,
     searchResults,
-    getTotalItems
+    getTotalItems,
   } = useTicketStore();
 
+  const searchTickets = (term) => {
+    if (!term.trim()) {
+      clearSearch();
+      return;
+    }
+
+    const searchLower = term.toLowerCase();
+    const results = filteredTickets.filter((ticket) => {
+      return ticket.customer_name?.toLowerCase().includes(searchLower);
+    });
+
+    console.log("Search results by name:", results);
+
+    setSearchResults(results);
+    setIsSearching(true);
+    setSearchTerm(term);
+    setCurrentPage(1);
+  };
+
+  const clearSearch = () => {
+    setSearchResults([]);
+    setIsSearching(false);
+    setSearchTerm("");
+    setCurrentPage(1);
+  };
+
   const handleSearchChange = (value) => {
-    setSearchTerm(value);
-    
-    if (value.trim() === '') {
+    setLocalSearchTerm(value);
+
+    if (value.trim() === "") {
       clearSearch();
     } else {
       searchTickets(value);
@@ -24,18 +53,18 @@ export const useSearch = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      searchTickets(searchTerm);
+    if (localSearchTerm.trim()) {
+      searchTickets(localSearchTerm);
     }
   };
 
   const handleClearSearch = () => {
-    setSearchTerm('');
+    setLocalSearchTerm("");
     clearSearch();
   };
 
   const performSearch = (term) => {
-    setSearchTerm(term);
+    setLocalSearchTerm(term);
     searchTickets(term);
   };
 
@@ -45,21 +74,21 @@ export const useSearch = () => {
 
   return {
     // State
-    searchTerm,
+    searchTerm: localSearchTerm,
     isSearching,
     searchResults,
     hasSearchResults,
     hasNoSearchResults,
     searchResultsCount,
-    
+
     // Actions
     handleSearchChange,
     handleSearchSubmit,
     handleClearSearch,
     performSearch,
     clearSearch,
-    
+
     // Helpers
-    setSearchTerm
+    setSearchTerm: setLocalSearchTerm,
   };
 };

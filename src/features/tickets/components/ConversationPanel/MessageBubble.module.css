@@ -1,0 +1,108 @@
+.messageBubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: none;
+}
+
+/* Sender (Agent) */
+.messageBubbleRight {
+  align-items: flex-end;
+}
+
+/* Receiver (Customer) */
+.messageBubbleLeft {
+  align-items: flex-start;
+}
+
+.senderInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  flex-direction: row-reverse;
+}
+.receiverInfo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  flex-direction: row;
+}
+
+
+.agentAvatar,
+.receiverAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.agentLabel {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-conversation-sender-info);
+  background: none;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.receiverLabel {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-black);
+  background: none;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.agentMessage {
+  min-width: 80px;
+  max-width: 273px;
+  width: fit-content;
+  min-height: 34px;
+  border-top-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding: 8px 16px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+  margin-bottom: 2px;
+}
+
+.receiverMessage {
+  min-width: 80px;
+  max-width: 268px;
+  width: fit-content;
+  min-height: 34px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  padding: 8px 16px;
+  background: var(--color-gray-light);
+  color: var(--color-black);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+  margin-bottom: 2px;
+}
+
+.timestamp {
+  font-size: 1.1rem;
+  color: var(--color-conversation-timestamp);
+  margin-top: 2px;
+  text-align: center;
+  width: 100%;
+}

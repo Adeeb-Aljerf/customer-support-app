@@ -16,12 +16,12 @@
 }
 
 .rowsLabel {
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 100%;
   letter-spacing: 0%;
-  color: #6C6C6C;
+  color: var(--color-gray);
 }
 
 .rowsInput {
@@ -29,17 +29,18 @@
   height: 1.6rem;
   border-radius: 0.4rem;
   padding: 0.4rem;
-  background: #FFFFFF;
+  background: var(--color-white);
   border: none;
   outline: none;
-  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5E5;
-  font-family: 'DM Sans', sans-serif;
+  box-shadow: 0rem 0.1rem 0.3rem 0rem var(--color-shadow-primary-transparent);
+  font-family: "DM Sans", sans-serif;
   font-size: 1.2rem;
   text-align: center;
 }
 
 .rowsInput:focus {
-  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5E5, 0rem 0rem 0rem 0.2rem rgba(210, 203, 229, 0.3);
+  box-shadow: 0rem 0.1rem 0.3rem 0rem var(--color-shadow-primary-transparent),
+    0rem 0rem 0rem 0.2rem var(--color-primary-light);
 }
 
 /* Second container - Navigation */
@@ -54,15 +55,15 @@
 .navButton {
   width: 1.6rem;
   height: 1.6rem;
-  background: #FFFFFF;
+  background: var(--color-white);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #6C6C6C;
-  box-shadow: 0rem 0.1rem 0.3rem 0rem #D2CBE5;
+  color: var(--color-gray);
+  box-shadow: 0rem 0.1rem 0.3rem 0rem var(--color-shadow-primary-transparent);
   border-radius: 2rem; /* 20px border radius for icons */
 }
 
@@ -72,7 +73,7 @@
 }
 
 .navButton:hover:not(:disabled) {
-  color: #333;
+  color: var(--color-gray-dark);
 }
 
 /* Page numbers container */
@@ -93,22 +94,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;;
-  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  font-family: "DM Sans", sans-serif;
   line-height: 100%;
   letter-spacing: 0%;
   border-radius: 0.4rem; /* 4px border radius for numbers */
 }
 
 .pageNumberActive {
-
-  color:#7336E6;
+  color: var(--color-primary);
   font-weight: 600;
   font-size: 1.2rem;
 }
 
 .pageNumberInactive {
-  color: #00000066;
+  color: var(--color-black-transparent);
   font-weight: 400;
   font-size: 1.2rem;
 }

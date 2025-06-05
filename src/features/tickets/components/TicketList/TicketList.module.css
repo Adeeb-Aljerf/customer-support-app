@@ -2,11 +2,13 @@
   width: 684px;
   /* Dynamic height using CSS calc and viewport units */
   height: max(
-    400px, /* Minimum height */
-    min(
-      calc(552px + (100vh - 730px) * 0.6), /* Grows from 552px base */
-      calc(100vh - 200px) /* Maximum to leave space for other elements */
-    )
+    400px,
+    /* Minimum height */
+      min(
+        calc(552px + (100vh - 730px) * 0.6),
+        /* Grows from 552px base */ calc(100vh - 200px)
+          /* Maximum to leave space for other elements */
+      )
   );
   display: flex;
   flex-direction: column;
@@ -43,9 +45,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 14px;
-  color: #6C6C6C;
+  color: var(--color-gray);
   padding: 0;
   margin: 0;
 }

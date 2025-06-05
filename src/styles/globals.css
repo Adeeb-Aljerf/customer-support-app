@@ -7,6 +7,7 @@
   --color-primary: #7336e6;
   --color-primary-dark: #3a2f53;
   --color-primary-darker: #251f32;
+  --color-primary-light-transparent: #ac8cf533; /* Added for conversation panel background */
 
   /* Secondary Blue Palette */
   --color-secondary-light: #caedff;
@@ -48,14 +49,18 @@
   /* Shadow Colors */
   --color-shadow-primary: #e2dfe9;
   --color-shadow-secondary: #b9b5c0a6;
-  
+  --color-shadow-primary-transparent: #d2cbe5e5; /* Added for pagination shadow */
+
+  /* Transparency Colors */
+  --color-black-transparent: #00000066; /* Added for pagination inactive numbers */
+
   /* Add these new shadow colors for ticket status button */
   --color-shadow-ticket-default: rgba(0, 0, 0, 0.15); /* #00000026 */
-  --color-shadow-ticket-selected-1: #DAD6E3;
+  --color-shadow-ticket-selected-1: #dad6e3;
   --color-shadow-ticket-selected-2: rgba(191, 163, 245, 0.3); /* #BFA3F54D */
 
   /* Add this new shadow color for sidebar */
-  --color-shadow-sidebar: #E2DFE9;
+  --color-shadow-sidebar: #e2dfe9;
 
   /* Add these new background colors for ticket status button */
   --color-background-ticket-default: rgba(255, 255, 255, 0.4); /* #FFFFFF66 */
@@ -66,13 +71,22 @@
   --color-border-primary: #e0d8f6;
   --color-border-secondary: #e2dfe9;
   --color-border-header: #dad4ea;
-  
+
   /* UI Component Colors */
   --color-ui-profile-button: #c9c1de;
   --color-ui-logo-background: #b69cf3;
   --color-ui-nav-item-hover: rgba(255, 255, 255, 0.15);
   --color-ui-nav-item-active: #ffffff33;
-  
+  --color-ui-nav-item-inactive: #ffffffa6; /* Added for inactive nav icons */
+
+  /* Conversation specific colors */
+  --color-conversation-empty-state: #6b7280;
+  --color-conversation-agent-bg: #3b82f6;
+  --color-conversation-customer-bg: #f3f4f6;
+  --color-conversation-customer-text: #1f2937;
+  --color-conversation-timestamp: #9ca3af;
+  --color-conversation-sender-info: #6b7280;
+
   --border-radius: 4px;
 
   /* Typography */
@@ -80,6 +94,21 @@
   --font-header2: 600 1.4rem/100% "DM Sans", sans-serif; /* 14px */
   --font-body: 400 1.4rem/100% "DM Sans", sans-serif; /* 14px */
   --font-small: 400 1.2rem/100% "DM Sans", sans-serif; /* 12px */
+
+  /* Ticket Status Colors */
+  --color-status-open-bg: #caedff;
+  --color-status-closed-bg: #fdc2bf;
+  --color-status-pending-bg: #eaf8a0;
+
+  /* Ticket Status Text Colors */
+  --color-status-open-text: #2c9ed8;
+  --color-status-closed-text: #e76a63;
+  --color-status-pending-text: #bfd445;
+
+  /* Selected Ticket Colors */
+  --color-ticket-selected-bg: #d2c0f5;
+  --color-ticket-selected-shadow-1: #e2dfe9cc;
+  --color-ticket-selected-shadow-2: #00000026;
 }
 
 /* Global Typography Styles */
@@ -91,7 +120,6 @@ html {
   font-size: 62.5%; /* 62.5% of 16px = 10px */
   box-sizing: border-box;
 }
-
 
 body {
   font-family: "DM Sans", sans-serif;

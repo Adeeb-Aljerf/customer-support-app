@@ -1,47 +1,60 @@
-import { useEffect } from 'react';
-import { useTicketStore } from '../store/useTicketStore';
-import { usePagination } from './usePagination';
-import { useSearch } from './useSearch';
+import { useEffect } from "react";
+import { useTicketStore } from "../store/useTicketStore";
+import { ticketsApi } from "../api/ticketsApi";
+import { usePagination } from "./usePagination";
+import { useSearch } from "./useSearch";
 
 export const useFetchTickets = () => {
-  const {
-    tickets,
-    filteredTickets,
-    loading,
-    error,
-    currentFilter,
-    fetchAndFilterTickets,
-    getPaginatedTickets
-  } = useTicketStore();
+  const { currentFilter, getPaginatedTickets, updateTicketFiltering } =
+    useTicketStore();
 
   const pagination = usePagination();
   const search = useSearch();
 
-  // Fetch tickets on mount
-  useEffect(() => {
-    fetchAndFilterTickets('open');
-  }, []);
+  const fetchAndFilterTickets = async (status) => {
+    updateTicketFiltering({
+      loading: true,
+      error: null,
+      currentFilter: status,
+      isSearching: false,
+      searchTerm: "",
+    });
 
-  const refetch = () => {
-    fetchAndFilterTickets(currentFilter);
+    try {
+      const allTickets = await ticketsApi.fetchTickets();
+      const filteredTickets = allTickets.filter((ticket) => {
+        const ticketStatus = ticket.status?.toLowerCase();
+        const filterStatus = status.toLowerCase();
+        return ticketStatus === filterStatus;
+      });
+
+      updateTicketFiltering({
+        allTickets,
+        tickets: allTickets,
+        filteredTickets,
+        searchResults: [],
+        loading: false,
+      });
+    } catch (error) {
+      updateTicketFiltering({
+        error: error.message,
+        loading: false,
+      });
+    }
   };
 
+  useEffect(() => {
+    fetchAndFilterTickets("open");
+  }, []);
+
   return {
-    // Tickets data
     tickets: getPaginatedTickets(),
-    allTickets: tickets,
-    filteredTickets,
-    loading,
-    error,
+    loading: useTicketStore((state) => state.loading),
+    error: useTicketStore((state) => state.error),
     currentFilter,
-    
-    // Pagination
     pagination,
-    
-    // Search
     search,
-    
-    // Actions
-    refetch
+    refetch: () => fetchAndFilterTickets(currentFilter),
+    fetchAndFilterTickets,
   };
 };

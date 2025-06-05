@@ -1,113 +1,98 @@
-import { create } from 'zustand';
-import { ticketsApi } from '../api/ticketsApi';
+import { create } from "zustand";
 
 export const useTicketStore = create((set, get) => ({
-  // State
+  // Core state
   allTickets: [],
   tickets: [],
   filteredTickets: [],
   searchResults: [],
   loading: false,
   error: null,
-  currentFilter: 'open',
-  searchTerm: '',
+  currentFilter: "open",
+  searchTerm: "",
   isSearching: false,
-  
+
   // Pagination state
   currentPage: 1,
   itemsPerPage: 10,
 
-  // Actions
-  setCurrentFilter: (filter) => set({ currentFilter: filter }),
+  // Selected ticket and conversation state
+  selectedTicket: null,
+  conversation: [],
+  conversationLoading: false,
+  conversationError: null,
+  postMessageLoading: false,
+  postMessageError: null,
+
+  // Batch update action for ticket filtering
+  updateTicketFiltering: (updates) =>
+    set((state) => ({
+      ...state,
+      ...updates,
+    })),
+
+  // Pagination actions
   setCurrentPage: (page) => set({ currentPage: page }),
   setItemsPerPage: (itemsPerPage) => set({ itemsPerPage }),
 
-  // Fetch all tickets and then filter
-  fetchAndFilterTickets: async (status) => {
-    console.log('Fetching and filtering tickets for status:', status);
-    
-    set({ loading: true, error: null, currentFilter: status, isSearching: false, searchTerm: '' });
-    
-    try {
-      const allTickets = await ticketsApi.fetchTickets();
-      console.log('All tickets from API:', allTickets);
-      
-      const filteredTickets = allTickets.filter(ticket => {
-        const ticketStatus = ticket.status?.toLowerCase();
-        const filterStatus = status.toLowerCase();
-        return ticketStatus === filterStatus;
-      });
-      
-      console.log('Filtered tickets:', filteredTickets);
-      
-      set({ 
-        allTickets,
-        tickets: filteredTickets,
-        filteredTickets: filteredTickets,
-        searchResults: [],
-        loading: false,
-        currentPage: 1
-      });
-    } catch (error) {
-      console.error('Error fetching tickets:', error);
-      set({ 
-        error: error.message, 
-        loading: false 
-      });
-    }
-  },
+  // Ticket selection actions
+  setSelectedTicket: (ticket) =>
+    set((state) => {
+      if (state.selectedTicket?.id === ticket?.id) return state;
+      return {
+        selectedTicket: ticket,
+        conversation: [],
+        conversationError: null,
+        conversationLoading: false,
+        postMessageLoading: false,
+        postMessageError: null,
+      };
+    }),
 
-  // Search tickets by name only
-  searchTickets: (searchTerm) => {
-    const { filteredTickets } = get();
-    
-    if (!searchTerm.trim()) {
-      set({ 
-        searchResults: [],
-        isSearching: false,
-        searchTerm: ''
-      });
-      return;
-    }
+  clearSelectedTicket: () =>
+    set({
+      selectedTicket: null,
+      conversation: [],
+      conversationError: null,
+      conversationLoading: false,
+      postMessageLoading: false,
+      postMessageError: null,
+    }),
 
-    const searchLower = searchTerm.toLowerCase();
-    const results = filteredTickets.filter(ticket => {
-      return ticket.customer_name?.toLowerCase().includes(searchLower);
-    });
+  // Conversation actions
+  setConversation: (conversation) =>
+    set((state) => (!state.selectedTicket ? state : { conversation })),
 
-    console.log('Search results by name:', results);
-    
-    set({ 
-      searchResults: results,
-      isSearching: true,
-      searchTerm: searchTerm,
-      currentPage: 1
-    });
-  },
+  setConversationLoading: (loading) =>
+    set((state) =>
+      !state.selectedTicket ? state : { conversationLoading: loading }
+    ),
 
-  // Clear search
-  clearSearch: () => {
-    set({ 
-      searchResults: [],
-      isSearching: false,
-      searchTerm: '',
-      currentPage: 1
-    });
-  },
+  setConversationError: (error) =>
+    set((state) =>
+      !state.selectedTicket ? state : { conversationError: error }
+    ),
 
-  // Get paginated tickets (either search results or filtered tickets)
+  setPostMessageLoading: (loading) => set({ postMessageLoading: loading }),
+  setPostMessageError: (error) => set({ postMessageError: error }),
+
+  // Helper getters
   getPaginatedTickets: () => {
-    const { filteredTickets, searchResults, isSearching, currentPage, itemsPerPage } = get();
+    const {
+      filteredTickets,
+      searchResults,
+      isSearching,
+      currentPage,
+      itemsPerPage,
+    } = get();
     const ticketsToShow = isSearching ? searchResults : filteredTickets;
-    
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return ticketsToShow.slice(startIndex, endIndex);
   },
 
-  // Get total items count
   getTotalItems: () => {
     const { filteredTickets, searchResults, isSearching } = get();
     return isSearching ? searchResults.length : filteredTickets.length;
-  }
+  },
 }));

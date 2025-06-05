@@ -35,6 +35,8 @@ import {
   ChevronRightIcon,
   ChevronDoubleLeftIcon,
   ClockIcon,
+  PhotoIcon,
+  PaperAirplaneIcon,
 } from "@heroicons/react/24/outline";
 
 // Solid Icons (for filled variants)
@@ -69,6 +71,8 @@ import {
   ChevronRightIcon as ChevronRightIconSolid,
   ChevronDoubleLeftIcon as ChevronDoubleLeftIconSolid,
   ClockIcon as ClockIconSolid,
+  PhotoIcon as PhotoIconSolid,
+  PaperAirplaneIcon as PaperAirplaneIconSolid,
 } from "@heroicons/react/24/solid";
 
 // Icon mapping for easy access by name
@@ -104,6 +108,8 @@ export const ICONS = {
   "chevron-right": ChevronRightIcon,
   "chevron-double-left": ChevronDoubleLeftIcon,
   clock: ClockIcon,
+  photo: PhotoIcon,
+  "paper-airplane": PaperAirplaneIcon,
 };
 
 // Solid icon mapping
@@ -138,6 +144,8 @@ export const ICONS_SOLID = {
   "chevron-right": ChevronRightIconSolid,
   "chevron-double-left": ChevronDoubleLeftIconSolid,
   clock: ClockIconSolid,
+  photo: PhotoIconSolid,
+  "paper-airplane": PaperAirplaneIconSolid,
 };
 
 // Also export individual icons for direct use
@@ -172,6 +180,8 @@ export {
   ChevronRightIcon,
   ChevronDoubleLeftIcon,
   ClockIcon,
+  PhotoIcon,
+  PaperAirplaneIcon,
   // Solid variants
   DocumentChartBarIconSolid,
   MagnifyingGlassIconSolid,
@@ -203,4 +213,6 @@ export {
   ChevronRightIconSolid,
   ChevronDoubleLeftIconSolid,
   ClockIconSolid,
+  PhotoIconSolid,
+  PaperAirplaneIconSolid,
 };
