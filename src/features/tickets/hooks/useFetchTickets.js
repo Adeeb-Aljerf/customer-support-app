@@ -22,11 +22,24 @@ export const useFetchTickets = () => {
 
     try {
       const allTickets = await ticketsApi.fetchTickets();
+      console.log("Fetched all tickets:", allTickets);
+
       const filteredTickets = allTickets.filter((ticket) => {
         const ticketStatus = ticket.status?.toLowerCase();
         const filterStatus = status.toLowerCase();
-        return ticketStatus === filterStatus;
+        const matches = ticketStatus === filterStatus;
+        console.log(
+          "Ticket:",
+          ticket.customer_name,
+          "status:",
+          ticketStatus,
+          "matches filter:",
+          matches
+        );
+        return matches;
       });
+
+      console.log("Filtered tickets for status:", status, filteredTickets);
 
       updateTicketFiltering({
         allTickets,

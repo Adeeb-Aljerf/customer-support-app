@@ -81,8 +81,8 @@ const ConversationPanel = () => {
   const transformedMessages = useMemo(() => {
     if (!conversation?.length) return [];
 
-    return conversation.map((msg) => ({
-      id: msg.id,
+    return conversation.map((msg, index) => ({
+      id: msg.id || `msg-${index}-${msg.timestamp || Date.now()}`,
       message: msg.content,
       timestamp: msg.timestamp,
       sender: msg.sender,

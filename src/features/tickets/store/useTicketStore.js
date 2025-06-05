@@ -31,6 +31,11 @@ export const useTicketStore = create((set, get) => ({
       ...updates,
     })),
 
+  // Search actions
+  setSearchResults: (results) => set({ searchResults: results }),
+  setIsSearching: (isSearching) => set({ isSearching }),
+  setSearchTerm: (term) => set({ searchTerm: term }),
+
   // Pagination actions
   setCurrentPage: (page) => set({ currentPage: page }),
   setItemsPerPage: (itemsPerPage) => set({ itemsPerPage }),
