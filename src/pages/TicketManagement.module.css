@@ -2,22 +2,24 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  position: relative;
   overflow: hidden;
   margin: 0;
   padding: 0;
 }
 
 .ticketSection {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .mainContent {
   display: flex;
   flex-direction: row;
+  margin-left: 2rem;
   flex: 1;
   height: 100vh;
   padding-top: clamp(2.4rem, 4.8vw, 4.8rem);
-  padding-left: clamp(13rem, 26vw, 26rem);
+  padding-left: 23.6rem; /* 72px (left) + 164px (sidebar width) */
   padding-right: 2rem;
   padding-bottom: 2rem;
   gap: clamp(1rem, 2vw, 2rem);
@@ -60,7 +62,7 @@
 /* Maintain minimum usable sizes */
 @media (max-width: 76.8rem) {
   .mainContent {
-    padding-left: clamp(8rem, 15vw, 26rem);
+    padding-left: 18rem; /* Adjusted for smaller sidebar */
     gap: clamp(0.8rem, 1.5vw, 2rem);
   }
 
@@ -76,7 +78,7 @@
 /* Very small screens */
 @media (max-width: 48rem) {
   .mainContent {
-    padding-left: clamp(4rem, 10vw, 26rem);
+    padding-left: 10rem; /* Adjusted for mobile sidebar */
     padding-top: clamp(1rem, 3vw, 4.8rem);
     gap: clamp(0.5rem, 1vw, 2rem);
   }

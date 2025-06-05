@@ -1,6 +1,6 @@
-import Icon from "../../common/icons/Icon";
-import TicketStatusButton from "../../common/TicketStatusButton/ticketStatusButton";
-import { useFetchTickets } from "../../../features/tickets/hooks/useFetchTickets";
+import Icon from "../../../../components/common/icons/Icon";
+import TicketStatusButton from "../../../../components/common/TicketStatusButton/ticketStatusButton";
+import { useFetchTickets } from "../../hooks/useFetchTickets";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
