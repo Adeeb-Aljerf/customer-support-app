@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Icon } from "../../common/icons/main.js";
 import styles from "./Navbar.module.css";
+import logoImage from "../../../assets/logos/Logo.png";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("tickets");
@@ -15,7 +16,7 @@ const Sidebar = () => {
       {/* Logo */}
       <div>
         <img
-          src="src/assets/logos/Logo.png"
+          src={logoImage}
           alt="Customer Support App Logo"
           className={styles.logoImage}
         />
