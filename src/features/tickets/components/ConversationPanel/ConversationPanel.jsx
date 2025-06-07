@@ -3,11 +3,13 @@ import MessageBubble from "./MessageBubble";
 import ReplyForm from "../ReplyForm/ReplyForm";
 import { useTicketSelection } from "../../hooks/useTicketSelection";
 import usePostMessage from "../../hooks/usePostMessage";
+import { formatDate, formatTicketTime } from "../../../../utils/dateUtils";
 import styles from "./Conversation.module.css";
 import {
   PhoneIconSolid,
   EnvelopeIconSolid,
   MapPinIconSolid,
+  XMarkIconSolid,
 } from "../../../../components/common/icons";
 
 const MemoizedMessageBubble = memo(MessageBubble);
@@ -32,6 +34,7 @@ const ConversationPanel = () => {
     conversation,
     conversationLoading,
     conversationError,
+    clearSelectedTicket,
   } = useTicketSelection();
 
   const { postMessage, loading: postMessageLoading } = usePostMessage();
@@ -84,7 +87,7 @@ const ConversationPanel = () => {
     return conversation.map((msg, index) => ({
       id: msg.id || `msg-${index}-${msg.timestamp || Date.now()}`,
       message: msg.content,
-      timestamp: msg.timestamp,
+      timestamp: formatDate(msg.timestamp),
       sender: msg.sender,
       isAgent: msg.isAgent,
       receiverName:
@@ -97,13 +100,14 @@ const ConversationPanel = () => {
       name:
         selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
       subject: selectedTicket?.subject,
-      timestamp: selectedTicket?.timestamp,
+      timestamp: formatTicketTime(selectedTicket?.timestamp, selectedTicket),
     }),
     [
       selectedTicket?.customer_name,
       selectedTicket?.customer,
       selectedTicket?.subject,
       selectedTicket?.timestamp,
+      selectedTicket,
     ]
   );
 
@@ -121,11 +125,9 @@ const ConversationPanel = () => {
   if (conversationLoading) {
     return (
       <div className={styles.conversationPanel}>
-        <div className={styles.backgroundImage} />
         <div className={styles.messagesContainer}>
           <EmptyState message="Loading conversation..." />
         </div>
-        <ReplyForm onSendMessage={handleSendMessage} disabled={true} />
       </div>
     );
   }
@@ -133,14 +135,12 @@ const ConversationPanel = () => {
   if (conversationError) {
     return (
       <div className={styles.conversationPanel}>
-        <div className={styles.backgroundImage} />
         <div className={styles.messagesContainer}>
           <EmptyState
             message={`Error: ${conversationError}`}
             style={{ color: "#EF4444" }}
           />
         </div>
-        <ReplyForm onSendMessage={handleSendMessage} disabled={true} />
       </div>
     );
   }
@@ -150,6 +150,13 @@ const ConversationPanel = () => {
       {/* Header */}
       <div className={styles.headerContainer}>
         <div className={styles.backgroundImage} />
+        <button
+          className={styles.closeButton}
+          onClick={clearSelectedTicket}
+          aria-label="Close conversation"
+        >
+          <XMarkIconSolid className={styles.closeIcon} />
+        </button>
 
         {/* Customer Info */}
         <div className={styles.customerInfoContainer}>

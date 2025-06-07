@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Icon from "../../../../components/common/icons/Icon";
 import styles from "./ReplyForm.module.css";
 
@@ -25,6 +25,7 @@ const ReplyForm = ({ onSendMessage, disabled = false }) => {
             name="face-smile"
             variant="outline"
             className={styles.emojiIcon}
+            color="#645F6D"
           />
           <input
             type="text"

@@ -1,4 +1,5 @@
 import { useTicketSelection } from "../../hooks/useTicketSelection";
+import { formatTicketTime } from "../../../../utils/dateUtils";
 import styles from "./TicketRow.module.css";
 
 const getStatusClass = (status) => {
@@ -14,26 +15,6 @@ const getStatusClass = (status) => {
   }
 };
 
-const formatTimeAgo = (dateString, ticket) => {
-  const dateToUse =
-    dateString || ticket?.updated_at || ticket?.timestamp || ticket?.created_at;
-
-  if (!dateToUse) return "N/A";
-
-  const now = new Date();
-  const ticketDate = new Date(dateToUse);
-
-  if (isNaN(ticketDate.getTime())) return "N/A";
-
-  const diffInMs = now - ticketDate;
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-  const diffInDays = Math.floor(diffInHours / 24);
-
-  if (diffInHours < 1) return "Just now";
-  if (diffInHours < 24) return `${diffInHours} hrs ago`;
-  return `${diffInDays} days ago`;
-};
-
 const TicketRow = ({ ticket }) => {
   const { selectedTicket, selectTicket } = useTicketSelection();
 
@@ -45,7 +26,7 @@ const TicketRow = ({ ticket }) => {
   const customerName = ticket.customer_name || ticket.customer || "Unknown";
   const subject = ticket.subject || "No Subject";
   const status = ticket.status || "Open";
-  const timestamp = formatTimeAgo(ticket.created_at, ticket);
+  const timestamp = formatTicketTime(ticket.created_at, ticket);
 
   return (
     <div

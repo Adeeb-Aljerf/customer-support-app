@@ -1,21 +1,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import { ticketsApi } from "../api/ticketsApi";
 import { useTicketStore } from "../store/useTicketStore";
-
-const formatTimeAgo = (dateString) => {
-  if (!dateString) return "N/A";
-  const now = new Date();
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) return "N/A";
-
-  const diffInMs = now - date;
-  const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-  const diffInDays = Math.floor(diffInHours / 24);
-
-  if (diffInHours < 1) return "Just now";
-  if (diffInHours < 24) return `${diffInHours} hrs ago`;
-  return `${diffInDays} days ago`;
-};
+import { formatDate } from "../../../utils/dateUtils";
 
 const useFetchConversation = (ticketId) => {
   const {
@@ -36,7 +22,7 @@ const useFetchConversation = (ticketId) => {
       messages.push({
         id: `ticket-${ticketData.id}`,
         content: ticketData.description,
-        timestamp: formatTimeAgo(ticketData.created_at),
+        timestamp: formatDate(ticketData.created_at),
         sender: ticketData.customer_name || "Customer",
         isAgent: false,
       });
@@ -53,7 +39,7 @@ const useFetchConversation = (ticketId) => {
         messages.push({
           id: message.id,
           content: message.content || message.message,
-          timestamp: formatTimeAgo(message.created_at || message.timestamp),
+          timestamp: formatDate(message.created_at || message.timestamp),
           sender: message.sender,
           isAgent,
         });

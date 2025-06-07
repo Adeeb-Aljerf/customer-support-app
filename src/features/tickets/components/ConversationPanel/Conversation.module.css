@@ -59,6 +59,7 @@
   justify-content: space-between;
   padding: 1.6rem 1.6rem;
   position: relative;
+
   background: var(--color-primary-light-transparent);
   backdrop-filter: blur(1.5rem);
   -webkit-backdrop-filter: blur(1.5rem);
@@ -211,4 +212,30 @@
   margin-right: 0.4rem; /* 4px */
 }
 
+.closeButton {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.closeButton:hover {
+  background: var(--color-gray-light);
+}
+
+.closeIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--color-gray-dark);
+}

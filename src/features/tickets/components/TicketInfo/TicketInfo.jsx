@@ -1,4 +1,4 @@
-import styles from './TicketInfo.module.css';
+import styles from "./TicketInfo.module.css";
 
 export default function TicketInfo() {
   return (

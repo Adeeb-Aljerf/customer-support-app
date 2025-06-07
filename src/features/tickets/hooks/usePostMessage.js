@@ -1,5 +1,6 @@
 import { ticketsApi } from "../api/ticketsApi";
 import { useTicketStore } from "../store/useTicketStore";
+import { formatDate } from "../../../utils/dateUtils";
 
 const usePostMessage = () => {
   const {
@@ -10,7 +11,7 @@ const usePostMessage = () => {
     setPostMessageError,
     postMessageLoading,
     postMessageError,
-    // fetchConversation, 
+    // fetchConversation,
   } = useTicketStore();
 
   const postMessage = async (message) => {
@@ -21,12 +22,13 @@ const usePostMessage = () => {
     setPostMessageLoading(true);
     setPostMessageError(null);
 
+    const now = new Date();
     // 1. Optimistically add the message
     const tempId = `temp-${Date.now()}`;
     const optimisticMsg = {
       id: tempId,
       content: message,
-      timestamp: "Just now",
+      timestamp: formatDate(now),
       sender: "Agent",
       isAgent: true,
       optimistic: true,
@@ -39,7 +41,7 @@ const usePostMessage = () => {
       // fetchConversation(selectedTicket.id);
     } catch (err) {
       // Remove the optimistic message if failed
-      setConversation((conversation || []).filter(msg => msg.id !== tempId));
+      setConversation((conversation || []).filter((msg) => msg.id !== tempId));
       setPostMessageError(err.message);
       console.error("Error posting message:", err);
       throw err;
