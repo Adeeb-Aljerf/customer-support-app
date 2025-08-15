@@ -1,6 +1,7 @@
-import { useTicketSelection } from "../../hooks/useTicketSelection";
+
 import { formatTicketTime } from "../../../../utils/dateUtils";
 import styles from "./TicketRow.module.css";
+
 
 const getStatusClass = (status) => {
   switch (status?.toLowerCase()) {
@@ -16,13 +17,14 @@ const getStatusClass = (status) => {
 };
 
 const TicketRow = ({ ticket }) => {
-  const { selectedTicket, selectTicket } = useTicketSelection();
+  // const { selectedTicket, selectTicket } = useTicketSelection();
+
 
   if (!ticket) {
     return <div className={styles.ticketRow}>Ticket Row Content</div>;
   }
 
-  const isSelected = selectedTicket?.id === ticket.id;
+  // const isSelected = selectedTicket?.id === ticket.id;
   const customerName = ticket.customer_name || ticket.customer || "Unknown";
   const subject = ticket.subject || "No Subject";
   const status = ticket.status || "Open";
@@ -30,8 +32,8 @@ const TicketRow = ({ ticket }) => {
 
   return (
     <div
-      className={`${styles.ticketRow} ${isSelected ? styles.selected : ""}`}
-      onClick={() => selectTicket(ticket)}
+      className={`${styles.ticketRow} `}
+      // onClick={() => selectTicket(ticket)}
       style={{ cursor: "pointer" }}
     >
       <div className={styles.firstContainer}>

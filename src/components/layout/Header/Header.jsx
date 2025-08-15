@@ -1,9 +1,9 @@
 import { Icon } from "../../common/icons/main.js";
-import { useSearch } from "../../../features/tickets/hooks/useSearch";
+// import { useSearch } from "../../../features/tickets/hooks/useSearch"  ;
 import styles from "./Header.module.css";
 
 const Header = ({ title = "Ticket List" }) => {
-  const { searchTerm, handleSearchChange } = useSearch();
+  // const { searchTerm, handleSearchChange } = useSearch();
 
   return (
     <header className={styles.header}>
@@ -16,8 +16,8 @@ const Header = ({ title = "Ticket List" }) => {
               type="text"
               placeholder="Search by name"
               className={styles.searchInput}
-              value={searchTerm}
-              onChange={(e) => handleSearchChange(e.target.value)}
+              // value={searchTerm}
+              // onChange={(e) => handleSearchChange(e.target.value)}
             />
             <Icon name="magnifying-glass" size={20} color="var(--color-gray)" />
           </div>

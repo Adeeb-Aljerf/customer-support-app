@@ -1,55 +1,45 @@
-import Icon from "../../../../components/common/icons/Icon";
+import {useTicketStore} from "../../store/useTicketStore";
 import TicketStatusButton from "../../../../components/common/TicketStatusButton/ticketStatusButton";
-import { useFetchTickets } from "../../hooks/useFetchTickets";
+import Icon from "../../../../components/common/icons/Icon";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
-  const { fetchAndFilterTickets, currentFilter } = useFetchTickets();
+  const { setFilter, currentFilter } = useTicketStore();
 
-  const handleStatusClick = (statusId) => {
-    console.log("Sidebar: clicked status:", statusId);
-    fetchAndFilterTickets(statusId);
+  const handleStatusClick = (status) => {
+    setFilter(status);
   };
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.ticketStatusContainer}>
-        <TicketStatusButton
-          isSelected={currentFilter === "open"}
-          onClick={() => handleStatusClick("open")}
-        >
-          <Icon
-            name="check-circle"
-            color="var(--color-secondary)"
-            variant="solid"
-            size="20"
-          ></Icon>
-          Open
-        </TicketStatusButton>
-        <TicketStatusButton
-          isSelected={currentFilter === "pending"}
-          onClick={() => handleStatusClick("pending")}
-        >
-          <Icon
-            name="clock"
-            color="var(--color-success)"
-            variant="solid"
-            size="20"
-          ></Icon>
-          Pending
-        </TicketStatusButton>
-        <TicketStatusButton
-          isSelected={currentFilter === "closed"}
-          onClick={() => handleStatusClick("closed")}
-        >
-          <Icon
-            name="x-circle"
-            color="var(--color-danger)"
-            variant="solid"
-            size="20"
-          ></Icon>
-          Closed
-        </TicketStatusButton>
+        {["open", "pending", "closed"].map((status) => (
+          <TicketStatusButton
+            key={status}
+            isSelected={currentFilter === status}
+            onClick={() => handleStatusClick(status)}
+          >
+            <Icon
+              name={
+                status === "open"
+                  ? "check-circle"
+                  : status === "pending"
+                  ? "clock"
+                  : "x-circle"
+              }
+              color={
+                status === "open"
+                  ? "var(--color-secondary)"
+                  : status === "pending"
+                  ? "var(--color-success)"
+                  : "var(--color-danger)"
+              }
+              size={20}
+              variant="solid"
+            />
+            {status.charAt(0).toUpperCase() + status.slice(1)}
+          </TicketStatusButton>
+        ))}
       </div>
     </div>
   );

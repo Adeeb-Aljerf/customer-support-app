@@ -14,7 +14,7 @@ const TicketManagement = () => {
           <div className={styles.ticketManagementContainer}>
             <TicketInfo />
             <TicketList />
-            <Pagination />
+            {/* <Pagination /> */}
           </div>
         </div>
 

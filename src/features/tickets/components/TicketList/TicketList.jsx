@@ -1,45 +1,28 @@
-import { useFetchTickets } from "../../hooks/useFetchTickets";
+import { useEffect } from "react";
+import{ useTicketStore} from "../../store/useTicketStore";
 import TicketRow from "../TicketRow/TicketRow";
 import styles from "./TicketList.module.css";
 
-export default function TicketList() {
-  const { tickets, loading, error, currentFilter, search } = useFetchTickets();
+const TicketList = () => {
+  const { fetchTickets, currentFilter, loading, error, getTicketsByStatus } =
+    useTicketStore();
 
-  const { isSearching, searchTerm } = search;
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets]);
 
-  if (loading) {
-    return (
-      <div className={styles.ticketList}>
-        <div className={styles.loading}>Loading {currentFilter} tickets...</div>
-      </div>
-    );
-  }
+  if (loading) return <div className={styles.loading}>Loading tickets...</div>;
+  if (error) return <div className={styles.error}>Error: {error}</div>;
 
-  if (error) {
-    return (
-      <div className={styles.ticketList}>
-        <div className={styles.error}>Error: {error}</div>
-      </div>
-    );
-  }
-
-  if (tickets.length === 0) {
-    return (
-      <div className={styles.ticketList}>
-        <div className={styles.loading}>
-          {isSearching
-            ? `No customers found with name "${searchTerm}"`
-            : `No ${currentFilter} tickets found`}
-        </div>
-      </div>
-    );
-  }
+  const filteredTickets = getTicketsByStatus(currentFilter);
 
   return (
     <div className={styles.ticketList}>
-      {tickets.map((ticket) => (
+      {filteredTickets.map((ticket) => (
         <TicketRow key={ticket.id} ticket={ticket} />
       ))}
     </div>
   );
-}
+};
+
+export default TicketList;
