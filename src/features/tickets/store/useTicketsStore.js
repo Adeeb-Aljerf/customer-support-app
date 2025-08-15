@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useTicketStore = create((set, get) => ({
+export const useTicketsStore = create((set, get) => ({
   tickets: [],
   loading: false,
   error: null,
@@ -29,4 +29,4 @@ export const useTicketStore = create((set, get) => ({
   },
 }));
 
-// export default useTicketStore;
+

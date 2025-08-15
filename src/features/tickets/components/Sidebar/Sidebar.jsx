@@ -1,10 +1,10 @@
-import {useTicketStore} from "../../store/useTicketStore";
+import {useTicketsStore} from "../../store/useTicketsStore";
 import TicketStatusButton from "../../../../components/common/TicketStatusButton/ticketStatusButton";
 import Icon from "../../../../components/common/icons/Icon";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
-  const { setFilter, currentFilter } = useTicketStore();
+  const { setFilter, currentFilter } = useTicketsStore();
 
   const handleStatusClick = (status) => {
     setFilter(status);

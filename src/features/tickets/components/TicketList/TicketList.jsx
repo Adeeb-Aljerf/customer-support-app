@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import{ useTicketStore} from "../../store/useTicketStore";
+import{ useTicketsStore} from "../../store/useTicketsStore";
 import TicketRow from "../TicketRow/TicketRow";
 import styles from "./TicketList.module.css";
 
 const TicketList = () => {
   const { fetchTickets, currentFilter, loading, error, getTicketsByStatus } =
-    useTicketStore();
+    useTicketsStore();
 
   useEffect(() => {
     fetchTickets();

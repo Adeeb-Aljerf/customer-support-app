@@ -1,9 +1,9 @@
 import { useMemo, memo, useRef, useEffect } from "react";
 import MessageBubble from "./MessageBubble";
 import ReplyForm from "../ReplyForm/ReplyForm";
-import { useTicketSelection } from "../../hooks/useTicketSelection";
-import usePostMessage from "../../hooks/usePostMessage";
-import { formatDate, formatTicketTime } from "../../../../utils/dateUtils";
+// import { useTicketSelection } from "../../hooks/useTicketSelection";
+// import usePostMessage from "../../hooks/usePostMessage";
+// import { formatDate, formatTicketTime } from "../../../../utils/dateUtils";
 import styles from "./Conversation.module.css";
 import {
   PhoneIconSolid,
@@ -29,43 +29,43 @@ const EmptyState = ({ message, subMessage }) => (
  *?Main panel for displaying ticket conversations
  */
 const ConversationPanel = () => {
-  const {
-    selectedTicket,
-    conversation,
-    conversationLoading,
-    conversationError,
-    clearSelectedTicket,
-  } = useTicketSelection();
+  // const {
+  //   selectedTicket,
+  //   conversation,
+  //   conversationLoading,
+  //   conversationError,
+  //   clearSelectedTicket,
+  // } = useTicketSelection();
 
-  const { postMessage, loading: postMessageLoading } = usePostMessage();
+  // const { postMessage, loading: postMessageLoading } = usePostMessage();
   const messagesContainerRef = useRef(null);
-  const previousMessageCountRef = useRef(0);
+  // const previousMessageCountRef = useRef(0);
 
-  const scrollToBottom = () => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop =
-        messagesContainerRef.current.scrollHeight;
-    }
-  };
+  // const scrollToBottom = () => {
+  //   if (messagesContainerRef.current) {
+  //     messagesContainerRef.current.scrollTop =
+  //       messagesContainerRef.current.scrollHeight;
+  //   }
+  // };
 
   // Scroll only on initial load
-  useEffect(() => {
-    if (!conversationLoading && conversation?.length > 0) {
-      scrollToBottom();
-      previousMessageCountRef.current = conversation.length;
-    }
-  }, [conversationLoading]);
+  // useEffect(() => {
+  //   if (!conversationLoading && conversation?.length > 0) {
+  //     scrollToBottom();
+  //     previousMessageCountRef.current = conversation.length;
+  //   }
+  // }, [conversationLoading]);
 
   // Scroll only when new messages are added
-  useEffect(() => {
-    if (
-      !conversationLoading &&
-      conversation?.length > previousMessageCountRef.current
-    ) {
-      scrollToBottom();
-      previousMessageCountRef.current = conversation.length;
-    }
-  }, [conversation, conversationLoading]);
+  // useEffect(() => {
+  //   if (
+  //     !conversationLoading &&
+  //     conversation?.length > previousMessageCountRef.current
+  //   ) {
+  //     scrollToBottom();
+  //     previousMessageCountRef.current = conversation.length;
+  //   }
+  // }, [conversation, conversationLoading]);
 
   const handleSendMessage = async (message) => {
     if (!selectedTicket?.id) {
@@ -81,69 +81,69 @@ const ConversationPanel = () => {
   };
 
   // Memoize message transformation since it's used in a list
-  const transformedMessages = useMemo(() => {
-    if (!conversation?.length) return [];
+  // const transformedMessages = useMemo(() => {
+  //   if (!conversation?.length) return [];
 
-    return conversation.map((msg, index) => ({
-      id: msg.id || `msg-${index}-${msg.timestamp || Date.now()}`,
-      message: msg.content,
-      timestamp: formatDate(msg.timestamp),
-      sender: msg.sender,
-      isAgent: msg.isAgent,
-      receiverName:
-        selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
-    }));
-  }, [conversation, selectedTicket?.customer_name, selectedTicket?.customer]);
+  //   return conversation.map((msg, index) => ({
+  //     id: msg.id || `msg-${index}-${msg.timestamp || Date.now()}`,
+  //     message: msg.content,
+  //     timestamp: formatDate(msg.timestamp),
+  //     sender: msg.sender,
+  //     isAgent: msg.isAgent,
+  //     receiverName:
+  //       selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
+  //   }));
+  // }, [conversation, selectedTicket?.customer_name, selectedTicket?.customer]);
 
-  const customerInfo = useMemo(
-    () => ({
-      name:
-        selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
-      subject: selectedTicket?.subject,
-      timestamp: formatTicketTime(selectedTicket?.timestamp, selectedTicket),
-    }),
-    [
-      selectedTicket?.customer_name,
-      selectedTicket?.customer,
-      selectedTicket?.subject,
-      selectedTicket?.timestamp,
-      selectedTicket,
-    ]
-  );
+  // const customerInfo = useMemo(
+  //   () => ({
+  //     name:
+  //       selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
+  //     subject: selectedTicket?.subject,
+  //     timestamp: formatTicketTime(selectedTicket?.timestamp, selectedTicket),
+  //   }),
+  //   [
+  //     selectedTicket?.customer_name,
+  //     selectedTicket?.customer,
+  //     selectedTicket?.subject,
+  //     selectedTicket?.timestamp,
+  //     selectedTicket,
+  //   ]
+  // );
 
-  if (!selectedTicket) {
-    return (
-      <div className={styles.conversationPanel}>
-        <EmptyState
-          message="Select a ticket to view conversation"
-          subMessage="Click on any ticket from the list"
-        />
-      </div>
-    );
-  }
+  // if (!selectedTicket) {
+  //   return (
+  //     <div className={styles.conversationPanel}>
+  //       <EmptyState
+  //         message="Select a ticket to view conversation"
+  //         subMessage="Click on any ticket from the list"
+  //       />
+  //     </div>
+  //   );
+  // }
 
-  if (conversationLoading) {
-    return (
-      <div className={styles.conversationPanel}>
-        <div className={styles.messagesContainer}>
-          <EmptyState message="Loading conversation..." />
-        </div>
-      </div>
-    );
-  }
+  // if (conversationLoading) {
+  //   return (
+  //     <div className={styles.conversationPanel}>
+  //       <div className={styles.messagesContainer}>
+  //         <EmptyState message="Loading conversation..." />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
-  if (conversationError) {
-    return (
-      <div className={styles.conversationPanel}>
-        <div className={styles.messagesContainer}>
-          <EmptyState
-            message={`Error: ${conversationError}`}
-            style={{ color: "#EF4444" }}
-          />
-        </div>
-      </div>
-    );
-  }
+  // if (conversationError) {
+  //   return (
+  //     <div className={styles.conversationPanel}>
+  //       <div className={styles.messagesContainer}>
+  //         <EmptyState
+  //           message={`Error: ${conversationError}`}
+  //           style={{ color: "#EF4444" }}
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={styles.conversationPanel}>
@@ -152,7 +152,7 @@ const ConversationPanel = () => {
         <div className={styles.backgroundImage} />
         <button
           className={styles.closeButton}
-          onClick={clearSelectedTicket}
+          // onClick={clearSelectedTicket}
           aria-label="Close conversation"
         >
           <XMarkIconSolid className={styles.closeIcon} />
@@ -209,7 +209,7 @@ const ConversationPanel = () => {
       {/* Reply Form */}
       <ReplyForm
         onSendMessage={handleSendMessage}
-        disabled={conversationLoading || postMessageLoading}
+        // disabled={conversationLoading || postMessageLoading}
       />
     </div>
   );
