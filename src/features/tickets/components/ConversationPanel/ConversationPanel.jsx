@@ -1,9 +1,6 @@
-import { useMemo, memo, useRef, useEffect } from "react";
+import { memo, useRef} from "react";
 import MessageBubble from "./MessageBubble";
 import ReplyForm from "../ReplyForm/ReplyForm";
-// import { useTicketSelection } from "../../hooks/useTicketSelection";
-// import usePostMessage from "../../hooks/usePostMessage";
-// import { formatDate, formatTicketTime } from "../../../../utils/dateUtils";
 import styles from "./Conversation.module.css";
 import {
   PhoneIconSolid,
@@ -11,8 +8,8 @@ import {
   MapPinIconSolid,
   XMarkIconSolid,
 } from "../../../../components/common/icons";
+import { useTicketChatStore } from "../../store/useTicketChatStore";
 
-const MemoizedMessageBubble = memo(MessageBubble);
 
 //? Simple empty state component - no need for memo
 const EmptyState = ({ message, subMessage }) => (
@@ -29,121 +26,76 @@ const EmptyState = ({ message, subMessage }) => (
  *?Main panel for displaying ticket conversations
  */
 const ConversationPanel = () => {
-  // const {
-  //   selectedTicket,
-  //   conversation,
-  //   conversationLoading,
-  //   conversationError,
-  //   clearSelectedTicket,
-  // } = useTicketSelection();
 
-  // const { postMessage, loading: postMessageLoading } = usePostMessage();
+  const {ticketChat,loading}=useTicketChatStore();
   const messagesContainerRef = useRef(null);
-  // const previousMessageCountRef = useRef(0);
 
-  // const scrollToBottom = () => {
-  //   if (messagesContainerRef.current) {
-  //     messagesContainerRef.current.scrollTop =
-  //       messagesContainerRef.current.scrollHeight;
-  //   }
-  // };
 
-  // Scroll only on initial load
-  // useEffect(() => {
-  //   if (!conversationLoading && conversation?.length > 0) {
-  //     scrollToBottom();
-  //     previousMessageCountRef.current = conversation.length;
-  //   }
-  // }, [conversationLoading]);
 
-  // Scroll only when new messages are added
-  // useEffect(() => {
-  //   if (
-  //     !conversationLoading &&
-  //     conversation?.length > previousMessageCountRef.current
-  //   ) {
-  //     scrollToBottom();
-  //     previousMessageCountRef.current = conversation.length;
-  //   }
-  // }, [conversation, conversationLoading]);
+  
+  // 🔄 Show loading spinner
+  if (loading) {
+    return (
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#f9fafb",
+          borderLeft: "1px solid #e5e7eb",
+        }}
+      >
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            border: "4px solid #e5e7eb",
+            borderTop: "4px solid #3b82f6",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+          }}
+        />
+        {/* Inline keyframes for the spinner */}
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
 
-  const handleSendMessage = async (message) => {
-    if (!selectedTicket?.id) {
-      console.error("No ticket selected");
-      return;
-    }
 
-    try {
-      await postMessage(message);
-    } catch (error) {
-      console.error("Failed to send message:", error);
-    }
-  };
+ // If no ticket selected, show placeholder
+  if (!ticketChat || !ticketChat.id) {
+    return (
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#f9fafb",
+          borderLeft: "1px solid #e5e7eb",
+        }}
+      >
+        <div style={{ textAlign: "center", color: "#6b7280" }}>
+          <p style={{ fontSize: "2rem", fontWeight: "600", marginBottom: "0.5rem" }}>
+            Select a chat
+          </p>
+          <p style={{ fontSize: "1.2rem", color: "#9ca3af" }}>
+            Choose a ticket from the list to view messages
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-  // Memoize message transformation since it's used in a list
-  // const transformedMessages = useMemo(() => {
-  //   if (!conversation?.length) return [];
 
-  //   return conversation.map((msg, index) => ({
-  //     id: msg.id || `msg-${index}-${msg.timestamp || Date.now()}`,
-  //     message: msg.content,
-  //     timestamp: formatDate(msg.timestamp),
-  //     sender: msg.sender,
-  //     isAgent: msg.isAgent,
-  //     receiverName:
-  //       selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
-  //   }));
-  // }, [conversation, selectedTicket?.customer_name, selectedTicket?.customer]);
-
-  // const customerInfo = useMemo(
-  //   () => ({
-  //     name:
-  //       selectedTicket?.customer_name || selectedTicket?.customer || "Unknown",
-  //     subject: selectedTicket?.subject,
-  //     timestamp: formatTicketTime(selectedTicket?.timestamp, selectedTicket),
-  //   }),
-  //   [
-  //     selectedTicket?.customer_name,
-  //     selectedTicket?.customer,
-  //     selectedTicket?.subject,
-  //     selectedTicket?.timestamp,
-  //     selectedTicket,
-  //   ]
-  // );
-
-  // if (!selectedTicket) {
-  //   return (
-  //     <div className={styles.conversationPanel}>
-  //       <EmptyState
-  //         message="Select a ticket to view conversation"
-  //         subMessage="Click on any ticket from the list"
-  //       />
-  //     </div>
-  //   );
-  // }
-
-  // if (conversationLoading) {
-  //   return (
-  //     <div className={styles.conversationPanel}>
-  //       <div className={styles.messagesContainer}>
-  //         <EmptyState message="Loading conversation..." />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (conversationError) {
-  //   return (
-  //     <div className={styles.conversationPanel}>
-  //       <div className={styles.messagesContainer}>
-  //         <EmptyState
-  //           message={`Error: ${conversationError}`}
-  //           style={{ color: "#EF4444" }}
-  //         />
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className={styles.conversationPanel}>
@@ -162,7 +114,7 @@ const ConversationPanel = () => {
         <div className={styles.customerInfoContainer}>
           <div className={styles.customerAvatarPlaceholder}></div>
           <div className={styles.customerDetailsContainer}>
-            <div className={styles.customerName}>{customerInfo.name}</div>
+            <div className={styles.customerName}>{ticketChat.name}</div>
             <div className={styles.customerIcons}>
               <div className={styles.iconContainer}>
                 <PhoneIconSolid className={styles.icon} />
@@ -180,26 +132,28 @@ const ConversationPanel = () => {
         <div className={styles.subjectContainer}>
           <div className={styles.subjectInfoContainer}>
             <p className={styles.subjectTitle}>Ticket Subject </p>
-            <p className={styles.subjectContent}>{customerInfo.subject}</p>
+            <p className={styles.subjectContent}>{ticketChat.subject}</p>
           </div>
-          {customerInfo.timestamp}
+          {ticketChat.timestamp}
         </div>
       </div>
 
       {/* Messages */}
       <div ref={messagesContainerRef} className={styles.messagesContainer}>
-        {!transformedMessages.length ? (
+        {!ticketChat?.messages?.length ? (
           <EmptyState
             message="No messages yet"
             subMessage="Start the conversation below"
           />
         ) : (
-          <div>
-            {transformedMessages.map((msg) => (
-              <MemoizedMessageBubble
-                key={msg.id}
-                {...msg}
-                receiverName={msg.receiverName}
+          <div> 
+            {ticketChat.messages.map((msg) => (
+              <MessageBubble
+                key={msg.timestamp}
+                message={msg.message}
+                customerName={msg.customer_name}
+                sender={msg.sender}
+                timestamp={msg.timestamp}
               />
             ))}
           </div>
@@ -208,12 +162,10 @@ const ConversationPanel = () => {
 
       {/* Reply Form */}
       <ReplyForm
-        onSendMessage={handleSendMessage}
-        // disabled={conversationLoading || postMessageLoading}
+        // onSendMessage={handleSendMessage}
       />
     </div>
   );
 };
 
-// Memoize the entire ConversationPanel to prevent unnecessary re-renders
 export default memo(ConversationPanel);

@@ -1,5 +1,7 @@
 
+import { useEffect } from "react";
 import { formatTicketTime } from "../../../../utils/dateUtils";
+import { useTicketChatStore } from "../../store/useTicketChatStore";
 import styles from "./TicketRow.module.css";
 
 
@@ -18,13 +20,15 @@ const getStatusClass = (status) => {
 
 const TicketRow = ({ ticket }) => {
   // const { selectedTicket, selectTicket } = useTicketSelection();
+  const {ticketChat,fetchTicketChat} = useTicketChatStore();
 
 
+
+
+  
   if (!ticket) {
     return <div className={styles.ticketRow}>Ticket Row Content</div>;
   }
-
-  // const isSelected = selectedTicket?.id === ticket.id;
   const customerName = ticket.customer_name || ticket.customer || "Unknown";
   const subject = ticket.subject || "No Subject";
   const status = ticket.status || "Open";
@@ -33,7 +37,7 @@ const TicketRow = ({ ticket }) => {
   return (
     <div
       className={`${styles.ticketRow} `}
-      // onClick={() => selectTicket(ticket)}
+      onClick={() => fetchTicketChat(ticket.id)}
       style={{ cursor: "pointer" }}
     >
       <div className={styles.firstContainer}>

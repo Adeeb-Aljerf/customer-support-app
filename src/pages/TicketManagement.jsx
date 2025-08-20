@@ -18,7 +18,7 @@ const TicketManagement = () => {
           </div>
         </div>
 
-        {/* <ConversationPanel />  */}
+        <ConversationPanel /> 
       </div>
     </div>
   );
