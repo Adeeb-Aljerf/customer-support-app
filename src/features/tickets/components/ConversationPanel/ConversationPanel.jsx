@@ -27,10 +27,13 @@ const EmptyState = ({ message, subMessage }) => (
  */
 const ConversationPanel = () => {
 
-  const {ticketChat,loading}=useTicketChatStore();
+  const {ticketChat,loading ,postReply}=useTicketChatStore();
   const messagesContainerRef = useRef(null);
 
-
+const handleSendMessage = (message) => {
+  if (!ticketChat?.id) return;
+  postReply(ticketChat.id, message);
+};
 
   
   // 🔄 Show loading spinner
@@ -114,7 +117,7 @@ const ConversationPanel = () => {
         <div className={styles.customerInfoContainer}>
           <div className={styles.customerAvatarPlaceholder}></div>
           <div className={styles.customerDetailsContainer}>
-            <div className={styles.customerName}>{ticketChat.name}</div>
+            <div className={styles.customerName}>{ticketChat.customer_name}</div>
             <div className={styles.customerIcons}>
               <div className={styles.iconContainer}>
                 <PhoneIconSolid className={styles.icon} />
@@ -134,7 +137,6 @@ const ConversationPanel = () => {
             <p className={styles.subjectTitle}>Ticket Subject </p>
             <p className={styles.subjectContent}>{ticketChat.subject}</p>
           </div>
-          {ticketChat.timestamp}
         </div>
       </div>
 
@@ -151,7 +153,7 @@ const ConversationPanel = () => {
               <MessageBubble
                 key={msg.timestamp}
                 message={msg.message}
-                customerName={msg.customer_name}
+                customerName={ticketChat.customer_name}
                 sender={msg.sender}
                 timestamp={msg.timestamp}
               />
@@ -161,9 +163,8 @@ const ConversationPanel = () => {
       </div>
 
       {/* Reply Form */}
-      <ReplyForm
-        // onSendMessage={handleSendMessage}
-      />
+            <ReplyForm onSendMessage={handleSendMessage} />
+
     </div>
   );
 };

@@ -13,8 +13,8 @@ function MessageBubble({ key, message, timestamp, sender, customerName }) {
       <div className={sender === "agent" ? styles.senderInfo : styles.receiverInfo}>
         <div className={sender === "agent" ? styles.agentAvatar : styles.receiverAvatar} />
         <div className={sender === "agent" ? styles.agentLabel : styles.receiverLabel}>
-          {sender === "agent" ? "Agent" : customerName}
-        </div>
+  {sender === "agent" ? "Agent" : customerName}
+</div>
       </div>
       <div className={sender === "agent" ? styles.agentMessage : styles.receiverMessage}>
         {message}
