@@ -1,9 +1,10 @@
+
+import { useTicketsStore } from "../../../features/tickets/store/useTicketsStore.js";
 import { Icon } from "../../common/icons/main.js";
-// import { useSearch } from "../../../features/tickets/hooks/useSearch"  ;
 import styles from "./Header.module.css";
 
 const Header = ({ title = "Ticket List" }) => {
-  // const { searchTerm, handleSearchChange } = useSearch();
+  const { setSearchQuery } = useTicketsStore();
 
   return (
     <header className={styles.header}>
@@ -15,9 +16,8 @@ const Header = ({ title = "Ticket List" }) => {
             <input
               type="text"
               placeholder="Search by name"
+              onChange={(e) => setSearchQuery(e.target.value)}
               className={styles.searchInput}
-              // value={searchTerm}
-              // onChange={(e) => handleSearchChange(e.target.value)}
             />
             <Icon name="magnifying-glass" size={20} color="var(--color-gray)" />
           </div>
@@ -30,12 +30,7 @@ const Header = ({ title = "Ticket List" }) => {
 
       <div className={styles.userActions}>
         <button className={styles.notificationButton}>
-          <Icon
-            name="bell"
-            variant="solid"
-            size={20}
-            color="var(--color-gray)"
-          />
+          <Icon name="bell" variant="solid" size={20} color="var(--color-gray)" />
         </button>
 
         <button className={styles.userButton}>

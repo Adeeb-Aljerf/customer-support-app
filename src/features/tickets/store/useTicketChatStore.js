@@ -52,10 +52,14 @@ postReply: async (ticketId, message) => {
       },
 
     }));
+    
   } catch (err) {
     set({ error: err.message});
   }
 },
+
+  //  clear selected ticket
+  clearTicketChat: () => set({ ticketChat: null }),
 
 
 

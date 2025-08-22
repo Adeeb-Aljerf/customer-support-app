@@ -4,9 +4,10 @@ export const useTicketsStore = create((set, get) => ({
   tickets: [],
   loading: false,
   error: null,
-  currentFilter: "open",
+  currentFilter: "open",  // default status filter
+  searchQuery: "",        // search input
 
-  // Fetch all tickets from API
+  // Fetch all tickets
   fetchTickets: async () => {
     set({ loading: true, error: null });
     try {
@@ -19,14 +20,29 @@ export const useTicketsStore = create((set, get) => ({
     }
   },
 
-  // Set the current filter
+  // Status filter
   setFilter: (status) => set({ currentFilter: status }),
 
-  // Get filtered tickets based on status
+  // Search query
+  setSearchQuery: (query) => set({ searchQuery: query }),
+
+  // Get tickets filtered by status
   getTicketsByStatus: (status) => {
-    const tickets = get().tickets;
-    return tickets.filter((t) => t.status === status);
+    return get().tickets.filter((t) => t.status === status);
+  },
+
+  // Get tickets filtered by status AND search query
+  getFilteredTickets: () => {
+    const { tickets, currentFilter, searchQuery } = get();
+
+    let filtered = tickets.filter((t) => t.status === currentFilter);
+
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((t) =>
+        t.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    return filtered;
   },
 }));
-
-

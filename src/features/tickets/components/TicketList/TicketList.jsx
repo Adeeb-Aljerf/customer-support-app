@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import{ useTicketsStore} from "../../store/useTicketsStore";
+import { useTicketsStore } from "../../store/useTicketsStore";
 import TicketRow from "../TicketRow/TicketRow";
 import styles from "./TicketList.module.css";
 
 const TicketList = () => {
-  const { fetchTickets, currentFilter, loading, error, getTicketsByStatus } =
-    useTicketsStore();
+  const { fetchTickets, loading, error, getFilteredTickets } = useTicketsStore();
 
   useEffect(() => {
     fetchTickets();
@@ -14,7 +13,7 @@ const TicketList = () => {
   if (loading) return <div className={styles.loading}>Loading tickets...</div>;
   if (error) return <div className={styles.error}>Error: {error}</div>;
 
-  const filteredTickets = getTicketsByStatus(currentFilter);
+  const filteredTickets = getFilteredTickets();
 
   return (
     <div className={styles.ticketList}>

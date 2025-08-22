@@ -27,7 +27,7 @@ const EmptyState = ({ message, subMessage }) => (
  */
 const ConversationPanel = () => {
 
-  const {ticketChat,loading ,postReply}=useTicketChatStore();
+  const {ticketChat,loading ,postReply ,clearTicketChat }=useTicketChatStore();
   const messagesContainerRef = useRef(null);
 
 const handleSendMessage = (message) => {
@@ -107,7 +107,7 @@ const handleSendMessage = (message) => {
         <div className={styles.backgroundImage} />
         <button
           className={styles.closeButton}
-          // onClick={clearSelectedTicket}
+    onClick={clearTicketChat}
           aria-label="Close conversation"
         >
           <XMarkIconSolid className={styles.closeIcon} />
